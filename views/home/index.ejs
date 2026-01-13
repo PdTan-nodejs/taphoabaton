@@ -1,0 +1,55 @@
+<section class="banner">
+    <div class="container">
+        <div class="banner-content">
+            <h1>Chào mừng đến với Tạp Hóa Bất ổn</h1>
+            <p>Nơi chia sẻ những thông tin hữu ích và cập nhật nhất</p>
+        </div>
+    </div>
+</section>
+
+<section class="intro-section">
+    <div class="container">
+        <h2>Giới thiệu</h2>
+        <p>Chúng tôi là một trang web chuyên cung cấp các bài viết, tin tức và thông tin hữu ích về nhiều chủ đề khác
+            nhau.
+            Với đội ngũ biên tập viên chuyên nghiệp, chúng tôi cam kết mang đến cho bạn những nội dung chất lượng và
+            đáng tin cậy.</p>
+    </div>
+</section>
+
+<section class="posts-section">
+    <div class="container">
+        <h2>Bài viết mới nhất</h2>
+        <div class="posts-grid">
+            <% posts.forEach(post=> { %>
+                <article class="post-card">
+                    <% if (post.image) { %>
+                        <div class="post-image">
+                            <img src="/uploads/<%= post.image %>" alt="<%= post.title %>">
+                        </div>
+                        <% } %>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-category">
+                                        <%= post.category.name %>
+                                    </span>
+                                    <span class="post-date">
+                                        <%= post.formattedDate %>
+                                    </span>
+                                </div>
+                                <h3><a href="/posts/<%= post.slug %>">
+                                        <%= post.title %>
+                                    </a></h3>
+                                <p>
+                                    <%= post.truncatedExcerpt %>
+                                </p>
+                                <a href="/posts/<%= post.slug %>" class="read-more">Đọc thêm →</a>
+                            </div>
+                </article>
+                <% }); %>
+        </div>
+        <div class="view-all">
+            <a href="/posts" class="btn-primary">Xem tất cả bài viết</a>
+        </div>
+    </div>
+</section>

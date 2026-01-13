@@ -1,0 +1,39 @@
+<article class="post-detail">
+    <div class="container">
+        <div class="post-header">
+            <div class="post-meta">
+                <span class="post-category"><%= post.category.name %></span>
+                <span class="post-date"><%= post.formattedDate %></span>
+                <span class="post-views"><%= post.views %> lượt xem</span>
+            </div>
+            <h1><%= post.title %></h1>
+        </div>
+
+        <% if (post.image) { %>
+        <div class="post-featured-image">
+            <img src="/uploads/<%= post.image %>" alt="<%= post.title %>">
+        </div>
+        <% } %>
+
+        <div class="post-content">
+            <%- post.content %>
+        </div>
+
+        <div class="related-posts">
+            <h3>Bài viết liên quan</h3>
+            <div class="related-posts-grid">
+                <% relatedPosts.forEach(relatedPost => { %>
+                <div class="related-post-card">
+                    <% if (relatedPost.image) { %>
+                    <div class="related-post-image">
+                        <img src="/uploads/<%= relatedPost.image %>" alt="<%= relatedPost.title %>">
+                    </div>
+                    <% } %>
+                    <h4><a href="/posts/<%= relatedPost.slug %>"><%= relatedPost.title %></a></h4>
+                    <p><%= relatedPost.truncatedExcerpt %></p>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</article>

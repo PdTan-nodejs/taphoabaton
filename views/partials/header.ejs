@@ -1,0 +1,26 @@
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">Tạp Hóa Bất ổn</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/"
+                        class="<%= typeof currentPage !== 'undefined' && currentPage === 'home' ? 'active' : '' %>">Trang
+                        chủ</a></li>
+                <li><a href="/posts"
+                        class="<%= typeof currentPage !== 'undefined' && currentPage === 'posts' ? 'active' : '' %>">Bài
+                        viết</a></li>
+                <li><a href="/contact"
+                        class="<%= typeof currentPage !== 'undefined' && currentPage === 'contact' ? 'active' : '' %>">Liên
+                        hệ</a></li>
+                <% if (typeof user !=='undefined' && user) { %>
+                    <li><a href="/admin/dashboard">Admin</a></li>
+                    <li><a href="/admin/logout">Đăng xuất</a></li>
+                    <% } else { %>
+                        <li><a href="/admin/login">Đăng nhập</a></li>
+                        <% } %>
+            </ul>
+        </nav>
+    </div>
+</header>
