@@ -19,6 +19,7 @@
     "ejs": "^3.1.9",
     "express-ejs-layouts": "^2.5.1",
     "sequelize": "^6.35.0",
+    "sqlite3": "^5.1.6",
     "mysql2": "^3.6.5",
     "bcryptjs": "^2.4.3",
     "express-session": "^1.17.3",

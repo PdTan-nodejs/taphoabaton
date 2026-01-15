@@ -1,0 +1,36 @@
+<section class="featured-projects">
+    <div class="container">
+        <h2 class="section-title">Dự án tiêu biểu</h2>
+        <% if (typeof featuredProjects !== 'undefined' && featuredProjects.length > 0) { %>
+            <div class="projects-grid">
+                <% featuredProjects.forEach(project => { %>
+                    <article class="project-card">
+                        <% if (project.image) { %>
+                            <div class="project-image">
+                                <a href="/posts/<%= project.slug %>">
+                                    <img src="/uploads/<%= project.image %>" alt="<%= project.title %>">
+                                </a>
+                            </div>
+                        <% } %>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="project-category"><%= project.category.name %></span>
+                                <span class="project-date"><%= project.formattedDate %></span>
+                            </div>
+                            <h3><a href="/posts/<%= project.slug %>"><%= project.title %></a></h3>
+                            <% if (project.truncatedExcerpt) { %>
+                                <p><%= project.truncatedExcerpt %></p>
+                            <% } %>
+                            <a href="/posts/<%= project.slug %>" class="project-link">Chi tiết →</a>
+                        </div>
+                    </article>
+                <% }); %>
+            </div>
+            <div class="section-footer">
+                <a href="/projects" class="btn-primary">Xem tất cả dự án</a>
+            </div>
+        <% } else { %>
+            <p class="no-content">Chưa có dự án nào được đăng tải.</p>
+        <% } %>
+    </div>
+</section>

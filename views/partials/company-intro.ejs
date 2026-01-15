@@ -1,0 +1,16 @@
+<section class="company-intro">
+    <div class="container">
+        <% if (typeof companyIntro !== 'undefined' && companyIntro) { %>
+            <div class="company-intro-content">
+                <div class="company-intro-text">
+                    <h2 class="section-title"><%= companyIntro.title || 'Về chúng tôi' %></h2>
+                    <% if (companyIntro.description) { %>
+                        <p class="company-intro-description"><%= companyIntro.description %></p>
+                    <% } %>
+                    <p class="company-intro-content-text"><%= companyIntro.content %></p>
+                    <a href="/about" class="btn-secondary">Tìm hiểu thêm</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</section>

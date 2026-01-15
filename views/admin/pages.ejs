@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý bài viết - Admin</title>
+    <title>Quản lý trang - Admin</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/admin.css">
 </head>
@@ -14,8 +14,8 @@
         <div class="admin-sidebar">
             <ul class="admin-menu">
                 <li><a href="/admin/dashboard">Dashboard</a></li>
-                <li><a href="/admin/posts" class="active">Quản lý bài viết</a></li>
-                <li><a href="/admin/pages">Quản lý trang</a></li>
+                <li><a href="/admin/posts">Quản lý bài viết</a></li>
+                <li><a href="/admin/pages" class="active">Quản lý trang</a></li>
                 <li><a href="/admin/projects">Quản lý dự án</a></li>
                 <li><a href="/">Về trang chủ</a></li>
                 <li><a href="/admin/logout">Đăng xuất</a></li>
@@ -24,8 +24,8 @@
         
         <div class="admin-content">
             <div class="admin-header">
-                <h1>Quản lý bài viết</h1>
-                <a href="/admin/posts/create" class="btn-primary">Tạo bài viết mới</a>
+                <h1>Quản lý trang</h1>
+                <a href="/admin/pages/create" class="btn-primary">Tạo trang mới</a>
             </div>
             
             <table class="admin-table">
@@ -33,30 +33,27 @@
                     <tr>
                         <th>ID</th>
                         <th>Tiêu đề</th>
-                        <th>Danh mục</th>
+                        <th>Slug</th>
                         <th>Trạng thái</th>
-                        <th>Lượt xem</th>
                         <th>Ngày tạo</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% posts.forEach(post => { %>
+                    <% pages.forEach(page => { %>
                     <tr>
-                        <td><%= post.id %></td>
-                        <td><%= post.title %></td>
-                        <td><%= post.category.name %></td>
+                        <td><%= page.id %></td>
+                        <td><%= page.title %></td>
+                        <td><%= page.slug %></td>
                         <td>
-                            <span class="status-badge <%= post.status === 'published' ? 'published' : 'draft' %>">
-                                <%= post.status === 'published' ? 'Đã xuất bản' : 'Bản nháp' %>
+                            <span class="status-badge <%= page.status === 'published' ? 'published' : 'draft' %>">
+                                <%= page.status === 'published' ? 'Đã xuất bản' : 'Bản nháp' %>
                             </span>
                         </td>
-                        <td><%= post.views %></td>
-                        <td><%= post.formattedDate %></td>
+                        <td><%= page.formattedDate %></td>
                         <td>
-                            <a href="/posts/<%= post.slug %>" target="_blank" class="btn-view">Xem</a>
-                            <a href="/admin/posts/<%= post.id %>/edit" class="btn-edit">Sửa</a>
-                            <button onclick="deletePost(<%= post.id %>)" class="btn-delete">Xóa</button>
+                            <a href="/admin/pages/<%= page.id %>/edit" class="btn-edit">Sửa</a>
+                            <button onclick="deletePage(<%= page.id %>)" class="btn-delete">Xóa</button>
                         </td>
                     </tr>
                     <% }); %>
@@ -66,13 +63,13 @@
     </div>
 
     <script>
-        async function deletePost(id) {
-            if (!confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
+        async function deletePage(id) {
+            if (!confirm('Bạn có chắc chắn muốn xóa trang này?')) {
                 return;
             }
             
             try {
-                const response = await fetch(`/admin/posts/${id}`, {
+                const response = await fetch(`/admin/pages/${id}`, {
                     method: 'DELETE'
                 });
                 
@@ -80,13 +77,12 @@
                 if (data.success) {
                     location.reload();
                 } else {
-                    alert('Có lỗi xảy ra khi xóa bài viết');
+                    alert('Có lỗi xảy ra khi xóa trang');
                 }
             } catch (error) {
-                alert('Có lỗi xảy ra khi xóa bài viết');
+                alert('Có lỗi xảy ra khi xóa trang');
             }
         }
     </script>
 </body>
 </html>
-

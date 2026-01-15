@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= post ? 'Chỉnh sửa bài viết' : 'Tạo bài viết mới' %> - Admin</title>
+    <title><%= project ? 'Chỉnh sửa dự án' : 'Tạo dự án mới' %> - Admin</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/admin.css">
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
@@ -24,41 +24,29 @@
         </div>
         
         <div class="admin-content">
-            <h1><%= post ? 'Chỉnh sửa bài viết' : 'Tạo bài viết mới' %></h1>
+            <h1><%= project ? 'Chỉnh sửa dự án' : 'Tạo dự án mới' %></h1>
             
-            <form action="<%= post ? '/admin/posts/' + post.id : '/admin/posts' %>" method="POST" enctype="multipart/form-data" class="post-form">
+            <form action="<%= project ? '/admin/projects/' + project.id : '/admin/projects' %>" method="POST" enctype="multipart/form-data" class="post-form">
                 <div class="form-group">
                     <label for="title">Tiêu đề *</label>
-                    <input type="text" id="title" name="title" value="<%= post ? post.title : '' %>" required>
+                    <input type="text" id="title" name="title" value="<%= project ? project.title : '' %>" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="categoryId">Danh mục *</label>
-                    <select id="categoryId" name="categoryId" required>
-                        <option value="">Chọn danh mục</option>
-                        <% categories.forEach(category => { %>
-                        <option value="<%= category.id %>" <%= post && post.categoryId === category.id ? 'selected' : '' %>>
-                            <%= category.name %>
-                        </option>
-                        <% }); %>
-                    </select>
+                    <label for="description">Mô tả ngắn</label>
+                    <textarea id="description" name="description" rows="3"><%= project ? project.description || '' : '' %></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label for="excerpt">Đoạn trích</label>
-                    <textarea id="excerpt" name="excerpt" rows="3"><%= post ? post.excerpt || '' : '' %></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="content">Nội dung *</label>
-                    <textarea id="content" name="content" required><%= post ? post.content : '' %></textarea>
+                    <label for="content">Nội dung</label>
+                    <textarea id="content" name="content"><%= project ? project.content || '' : '' %></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label for="image">Hình ảnh</label>
-                    <% if (post && post.image) { %>
+                    <% if (project && project.image) { %>
                     <div class="current-image">
-                        <img src="/uploads/<%= post.image %>" alt="Current image">
+                        <img src="/uploads/<%= project.image %>" alt="Current image">
                         <p>Ảnh hiện tại</p>
                     </div>
                     <% } %>
@@ -67,16 +55,28 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="link">Link dự án</label>
+                    <input type="url" id="link" name="link" value="<%= project ? project.link || '' : '' %>">
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="featured" <%= project && project.featured ? 'checked' : '' %>>
+                        Nổi bật
+                    </label>
+                </div>
+                
+                <div class="form-group">
                     <label for="status">Trạng thái</label>
                     <select id="status" name="status">
-                        <option value="draft" <%= post && post.status === 'draft' ? 'selected' : '' %>>Bản nháp</option>
-                        <option value="published" <%= post && post.status === 'published' ? 'selected' : '' %>>Đã xuất bản</option>
+                        <option value="draft" <%= project && project.status === 'draft' ? 'selected' : '' %>>Bản nháp</option>
+                        <option value="published" <%= project && project.status === 'published' ? 'selected' : '' %>>Đã xuất bản</option>
                     </select>
                 </div>
                 
                 <div class="form-actions">
-                    <button type="submit" class="btn-primary"><%= post ? 'Cập nhật' : 'Tạo mới' %></button>
-                    <a href="/admin/posts" class="btn-secondary">Hủy</a>
+                    <button type="submit" class="btn-primary"><%= project ? 'Cập nhật' : 'Tạo mới' %></button>
+                    <a href="/admin/projects" class="btn-secondary">Hủy</a>
                 </div>
             </form>
         </div>
@@ -89,4 +89,3 @@
     </script>
 </body>
 </html>
-

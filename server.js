@@ -6,7 +6,10 @@ const expressLayouts = require('express-ejs-layouts');
 const app = express();
 
 // Import routes
+const introRoutes = require('./routes/intro');
 const homeRoutes = require('./routes/home');
+const aboutRoutes = require('./routes/about');
+const projectRoutes = require('./routes/project');
 const postRoutes = require('./routes/post');
 const contactRoutes = require('./routes/contact');
 const adminRoutes = require('./routes/admin');
@@ -18,8 +21,14 @@ app.use(expressLayouts);
 app.set('layout', 'layout');
 
 // Middleware
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Static files with cache headers
+const staticOptions = {
+  maxAge: process.env.NODE_ENV === 'production' ? 31536000000 : 0, // 1 year in production
+  etag: true,
+  lastModified: true
+};
+app.use(express.static(path.join(__dirname, 'public'), staticOptions));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), staticOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -41,20 +50,39 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/', homeRoutes);
+app.use('/', introRoutes);
+app.use('/home', homeRoutes);
+app.use('/about', aboutRoutes);
+app.use('/projects', projectRoutes);
 app.use('/posts', postRoutes);
 app.use('/contact', contactRoutes);
 app.use('/admin', adminRoutes);
 
 // 404 handler
-app.use((req, res) => {
-  res.status(404).render('404', { title: '404 - Không tìm thấy trang', layout: 'layout' });
+app.use((req, res, next) => {
+  res.status(404).render('404', { 
+    title: '404 - Không tìm thấy trang',
+    metaDescription: 'Trang bạn tìm kiếm không tồn tại.',
+    layout: 'layout' 
+  });
 });
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).render('500', { title: '500 - Lỗi server', error: err, layout: 'layout' });
+  if (process.env.NODE_ENV === 'production') {
+    // In production, log errors but don't expose stack trace
+    // Consider using a logging service here
+  } else {
+    // In development, show error details
+    console.error(err.stack);
+  }
+  
+  res.status(500).render('500', { 
+    title: '500 - Lỗi server',
+    metaDescription: 'Đã xảy ra lỗi server. Vui lòng thử lại sau.',
+    error: process.env.NODE_ENV === 'development' ? err : null,
+    layout: 'layout' 
+  });
 });
 
 const PORT = process.env.PORT || 3000;

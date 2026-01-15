@@ -1,11 +1,7 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "taphoabaton_db",
-    "host": "localhost",
-    "port": 3306,
-    "dialect": "mysql"
+    "dialect": "sqlite",
+    "storage": "./database/dev.sqlite"
   },
   "production": {
     "username": "root",
@@ -16,4 +12,3 @@
     "dialect": "mysql"
   }
 }
-

@@ -40,8 +40,17 @@ exports.list = async (req, res) => {
 
     const totalPages = Math.ceil(count / limit);
 
+    const pageTitle = category ? category.name : 'Danh sách bài viết';
+    const pageDescription = category 
+      ? `Danh sách bài viết thuộc danh mục ${category.name}. Khám phá những bài viết hay và bổ ích.`
+      : 'Khám phá danh sách tất cả các bài viết hay và bổ ích trên Tạp Hóa Bất ổn.';
+
     res.render('post/list', {
-      title: category ? category.name : 'Danh sách bài viết',
+      title: pageTitle,
+      metaDescription: pageDescription,
+      metaKeywords: category ? `${category.name}, bài viết, blog` : 'bài viết, blog, danh sách bài viết',
+      ogTitle: `${pageTitle} - Tạp Hóa Bất ổn`,
+      ogDescription: pageDescription,
       posts: posts.map(post => ({
         ...post.toJSON(),
         formattedDate: formatDate(post.createdAt),
@@ -94,8 +103,19 @@ exports.detail = async (req, res) => {
       limit: 4
     });
 
+    const metaDescription = post.excerpt || truncate(post.content, 160);
+    const ogImage = post.image ? `${req.protocol}://${req.get('host')}/uploads/${post.image}` : null;
+    const ogUrl = `${req.protocol}://${req.get('host')}/posts/${post.slug}`;
+
     res.render('post/detail', {
       title: post.title,
+      metaDescription: metaDescription,
+      metaKeywords: `${post.category.name}, ${post.title}, bài viết, blog`,
+      ogTitle: post.title,
+      ogDescription: metaDescription,
+      ogType: 'article',
+      ogImage: ogImage,
+      ogUrl: ogUrl,
       post: {
         ...post.toJSON(),
         formattedDate: formatDate(post.createdAt)

@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= typeof title !== 'undefined' ? title + ' - ' : '' %>Tạp Hóa Bát Tôn</title>
+    <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Tạp Hóa Bất ổn - Blog website với những bài viết hay và bổ ích' %>">
+    <meta name="keywords" content="<%= typeof metaKeywords !== 'undefined' ? metaKeywords : 'blog, tin tức, bài viết' %>">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="<%= typeof ogTitle !== 'undefined' ? ogTitle : (typeof title !== 'undefined' ? title + ' - Tạp Hóa Bất ổn' : 'Tạp Hóa Bất ổn') %>">
+    <meta property="og:description" content="<%= typeof ogDescription !== 'undefined' ? ogDescription : (typeof metaDescription !== 'undefined' ? metaDescription : 'Tạp Hóa Bất ổn - Blog website với những bài viết hay và bổ ích') %>">
+    <meta property="og:type" content="<%= typeof ogType !== 'undefined' ? ogType : 'website' %>">
+    <% if (typeof ogUrl !== 'undefined' && ogUrl) { %>
+    <meta property="og:url" content="<%= ogUrl %>">
+    <% } %>
+    <% if (typeof ogImage !== 'undefined' && ogImage) { %>
+    <meta property="og:image" content="<%= ogImage %>">
+    <% } else if (typeof baseUrl !== 'undefined') { %>
+    <meta property="og:image" content="<%= baseUrl %>/images/og-default.jpg">
+    <% } %>
+    <meta property="og:site_name" content="Tạp Hóa Bất ổn">
+    
+    <title>
+        <%= typeof title !=='undefined' ? title + ' - ' : '' %>Tạp Hóa Bất ổn
+    </title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <%- include('partials/header') %>
-    
-    <main>
-        <%- body %>
-    </main>
-    
-    <%- include('partials/footer') %>
-    
-    <script src="/js/main.js"></script>
+
+        <main>
+            <%- body %>
+        </main>
+
+        <%- include('partials/footer') %>
+
+            <script src="/js/main.js"></script>
 </body>
+
 </html>

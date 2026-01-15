@@ -1,0 +1,22 @@
+<div class="container">
+    <section class="project-section">
+        <h1>Dự án</h1>
+        <div class="projects-grid">
+            <% if (projects && projects.length > 0) { %>
+                <% projects.forEach(project => { %>
+                    <div class="project-item">
+                        <% if (project.image) { %>
+                            <img src="/uploads/<%= project.image %>" alt="<%= project.title %>">
+                        <% } %>
+                        <h3><%= project.title %></h3>
+                        <% if (project.excerpt) { %>
+                            <p><%= project.excerpt %></p>
+                        <% } %>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>Chưa có dự án nào.</p>
+            <% } %>
+        </div>
+    </section>
+</div>

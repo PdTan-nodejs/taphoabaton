@@ -1,0 +1,40 @@
+<section class="hero-slider">
+    <% if (typeof heroSlides !== 'undefined' && heroSlides.length > 0) { %>
+        <div class="hero-slider-container">
+            <div class="hero-slides">
+                <% heroSlides.forEach((slide, index) => { %>
+                    <div class="hero-slide <%= index === 0 ? 'active' : '' %>" data-slide="<%= index %>">
+                        <div class="hero-slide-image">
+                            <% if (slide.image) { %>
+                                <img src="/uploads/<%= slide.image %>" alt="<%= slide.title %>">
+                            <% } %>
+                            <div class="hero-slide-overlay"></div>
+                        </div>
+                        <div class="hero-slide-content">
+                            <div class="container">
+                                <div class="hero-slide-text">
+                                    <h1><%= slide.title %></h1>
+                                    <% if (slide.excerpt || slide.truncatedExcerpt) { %>
+                                        <p><%= slide.truncatedExcerpt || slide.excerpt %></p>
+                                    <% } %>
+                                    <a href="/posts/<%= slide.slug %>" class="btn-hero">Xem thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+            <% if (heroSlides.length > 1) { %>
+                <div class="hero-slider-controls">
+                    <button class="hero-slider-prev" aria-label="Previous slide">‹</button>
+                    <button class="hero-slider-next" aria-label="Next slide">›</button>
+                </div>
+                <div class="hero-slider-dots">
+                    <% heroSlides.forEach((slide, index) => { %>
+                        <button class="hero-slider-dot <%= index === 0 ? 'active' : '' %>" data-slide="<%= index %>" aria-label="Go to slide <%= index + 1 %>"></button>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+</section>

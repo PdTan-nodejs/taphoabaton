@@ -1,0 +1,36 @@
+<section class="news-events">
+    <div class="container">
+        <h2 class="section-title">Tin tức – Sự kiện</h2>
+        <% if (typeof newsEvents !== 'undefined' && newsEvents.length > 0) { %>
+            <div class="news-grid">
+                <% newsEvents.forEach(news => { %>
+                    <article class="news-card">
+                        <% if (news.image) { %>
+                            <div class="news-image">
+                                <a href="/posts/<%= news.slug %>">
+                                    <img src="/uploads/<%= news.image %>" alt="<%= news.title %>">
+                                </a>
+                            </div>
+                        <% } %>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category"><%= news.category.name %></span>
+                                <span class="news-date"><%= news.formattedDate %></span>
+                            </div>
+                            <h3><a href="/posts/<%= news.slug %>"><%= news.title %></a></h3>
+                            <% if (news.truncatedExcerpt) { %>
+                                <p><%= news.truncatedExcerpt %></p>
+                            <% } %>
+                            <a href="/posts/<%= news.slug %>" class="news-link">Đọc thêm →</a>
+                        </div>
+                    </article>
+                <% }); %>
+            </div>
+            <div class="section-footer">
+                <a href="/posts" class="btn-primary">Xem tất cả tin tức</a>
+            </div>
+        <% } else { %>
+            <p class="no-content">Chưa có tin tức nào được đăng tải.</p>
+        <% } %>
+    </div>
+</section>
