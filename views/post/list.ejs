@@ -1,59 +1,86 @@
 <section class="posts-page">
     <div class="container">
-        <h1><%= currentCategory ? currentCategory.name : 'Tất cả bài viết' %></h1>
-        
-        <div class="categories-filter">
-            <a href="/posts" class="category-tag <%= !currentCategory ? 'active' : '' %>">Tất cả</a>
-            <% categories.forEach(category => { %>
-            <a href="/posts?category=<%= category.slug %>" class="category-tag <%= currentCategory && currentCategory.id === category.id ? 'active' : '' %>">
-                <%= category.name %> (<%= category.posts ? category.posts.length : 0 %>)
-            </a>
-            <% }); %>
+        <div class="posts-page-header">
+            <h1 class="posts-page-title">
+                <%= currentCategory ? currentCategory.name : 'Tất cả bài viết' %>
+            </h1>
+
+            <div class="categories-filter">
+                <a href="/posts" class="category-tag <%= !currentCategory ? 'active' : '' %>">Tất cả</a>
+                <% if (typeof categories !=='undefined' && categories && categories.length> 0) { %>
+                    <% categories.forEach(category=> { %>
+                        <a href="/posts?category=<%= category.slug %>"
+                            class="category-tag <%= currentCategory && currentCategory.id === category.id ? 'active' : '' %>">
+                            <%= category.name %> (<%= category.posts ? category.posts.length : 0 %>)
+                        </a>
+                        <% }); %>
+                            <% } %>
+            </div>
         </div>
 
-        <div class="posts-grid">
-            <% if (posts.length > 0) { %>
-                <% posts.forEach(post => { %>
-                <article class="post-card">
-                    <% if (post.image) { %>
-                    <div class="post-image">
-                        <img src="/uploads/<%= post.image %>" alt="<%= post.title %>">
-                    </div>
+        <div class="posts-grid enterprise-grid">
+            <% if (posts.length> 0) { %>
+                <% posts.forEach(post=> { %>
+                    <article class="post-card enterprise-card">
+                        <% if (post.image) { %>
+                            <div class="post-image enterprise-card-image">
+                                <a href="/posts/<%= post.slug %>">
+                                    <img src="/uploads/<%= post.image %>" alt="<%= post.title %>">
+                                </a>
+                            </div>
+                            <% } %>
+                                <div class="post-content enterprise-card-content">
+                                    <div class="post-meta enterprise-meta">
+                                        <% if (post.category && post.category.name) { %>
+                                            <span class="post-category enterprise-category">
+                                                <%= post.category.name %>
+                                            </span>
+                                            <% } %>
+                                                <span class="post-date enterprise-date">
+                                                    <%= post.formattedDate %>
+                                                </span>
+                                    </div>
+                                    <h3 class="enterprise-card-title"><a href="/posts/<%= post.slug %>">
+                                            <%= post.title %>
+                                        </a></h3>
+                                    <p class="enterprise-card-excerpt">
+                                        <%= post.truncatedExcerpt %>
+                                    </p>
+                                    <a href="/posts/<%= post.slug %>" class="read-more enterprise-read-more">Đọc thêm
+                                        →</a>
+                                </div>
+                    </article>
+                    <% }); %>
+                        <% } else { %>
+                            <p class="no-posts">Chưa có bài viết nào.</p>
+                            <% } %>
+        </div>
+
+        <% if (totalPages> 1) { %>
+            <div class="pagination enterprise-pagination">
+                <% if (hasPrevPage) { %>
+                    <a href="/posts?page=<%= currentPage - 1 %><%= currentCategory ? '&category=' + currentCategory.slug : '' %>"
+                        class="page-link">← Trước</a>
                     <% } %>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-category"><%= post.category.name %></span>
-                            <span class="post-date"><%= post.formattedDate %></span>
-                        </div>
-                        <h3><a href="/posts/<%= post.slug %>"><%= post.title %></a></h3>
-                        <p><%= post.truncatedExcerpt %></p>
-                        <a href="/posts/<%= post.slug %>" class="read-more">Đọc thêm →</a>
-                    </div>
-                </article>
-                <% }); %>
-            <% } else { %>
-                <p class="no-posts">Chưa có bài viết nào.</p>
-            <% } %>
-        </div>
 
-        <% if (totalPages > 1) { %>
-        <div class="pagination">
-            <% if (hasPrevPage) { %>
-            <a href="/posts?page=<%= currentPage - 1 %><%= currentCategory ? '&category=' + currentCategory.slug : '' %>" class="page-link">← Trước</a>
+                        <% for (let i=1; i <=totalPages; i++) { %>
+                            <% if (i===currentPage) { %>
+                                <span class="page-link active">
+                                    <%= i %>
+                                </span>
+                                <% } else { %>
+                                    <a href="/posts?page=<%= i %><%= currentCategory ? '&category=' + currentCategory.slug : '' %>"
+                                        class="page-link">
+                                        <%= i %>
+                                    </a>
+                                    <% } %>
+                                        <% } %>
+
+                                            <% if (hasNextPage) { %>
+                                                <a href="/posts?page=<%= currentPage + 1 %><%= currentCategory ? '&category=' + currentCategory.slug : '' %>"
+                                                    class="page-link">Sau →</a>
+                                                <% } %>
+            </div>
             <% } %>
-            
-            <% for (let i = 1; i <= totalPages; i++) { %>
-                <% if (i === currentPage) { %>
-                <span class="page-link active"><%= i %></span>
-                <% } else { %>
-                <a href="/posts?page=<%= i %><%= currentCategory ? '&category=' + currentCategory.slug : '' %>" class="page-link"><%= i %></a>
-                <% } %>
-            <% } %>
-            
-            <% if (hasNextPage) { %>
-            <a href="/posts?page=<%= currentPage + 1 %><%= currentCategory ? '&category=' + currentCategory.slug : '' %>" class="page-link">Sau →</a>
-            <% } %>
-        </div>
-        <% } %>
     </div>
 </section>

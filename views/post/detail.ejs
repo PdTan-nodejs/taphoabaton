@@ -1,39 +1,68 @@
-<article class="post-detail">
+<article class="post-detail enterprise-detail">
     <div class="container">
-        <div class="post-header">
-            <div class="post-meta">
-                <span class="post-category"><%= post.category.name %></span>
-                <span class="post-date"><%= post.formattedDate %></span>
-                <span class="post-views"><%= post.views %> lượt xem</span>
+        <nav class="breadcrumb enterprise-breadcrumb">
+            <a href="/">Trang chủ</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="/posts">Bài viết</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">
+                <%= post.title %>
+            </span>
+        </nav>
+
+        <div class="post-header enterprise-detail-header">
+            <div class="post-meta enterprise-detail-meta">
+                <% if (post.category && post.category.name) { %>
+                    <span class="post-category enterprise-detail-category">
+                        <%= post.category.name %>
+                    </span>
+                    <% } %>
+                        <span class="post-date enterprise-detail-date">
+                            <%= post.formattedDate %>
+                        </span>
+                        <span class="post-views enterprise-detail-views">
+                            <%= post.views %> lượt xem
+                        </span>
             </div>
-            <h1><%= post.title %></h1>
+            <h1 class="enterprise-detail-title">
+                <%= post.title %>
+            </h1>
         </div>
 
         <% if (post.image) { %>
-        <div class="post-featured-image">
-            <img src="/uploads/<%= post.image %>" alt="<%= post.title %>">
-        </div>
-        <% } %>
-
-        <div class="post-content">
-            <%- post.content %>
-        </div>
-
-        <div class="related-posts">
-            <h3>Bài viết liên quan</h3>
-            <div class="related-posts-grid">
-                <% relatedPosts.forEach(relatedPost => { %>
-                <div class="related-post-card">
-                    <% if (relatedPost.image) { %>
-                    <div class="related-post-image">
-                        <img src="/uploads/<%= relatedPost.image %>" alt="<%= relatedPost.title %>">
-                    </div>
-                    <% } %>
-                    <h4><a href="/posts/<%= relatedPost.slug %>"><%= relatedPost.title %></a></h4>
-                    <p><%= relatedPost.truncatedExcerpt %></p>
-                </div>
-                <% }); %>
+            <div class="post-featured-image enterprise-featured-image">
+                <img src="/uploads/<%= post.image %>" alt="<%= post.title %>">
             </div>
-        </div>
+            <% } %>
+
+                <div class="post-content enterprise-detail-content">
+                    <%- post.content %>
+                </div>
+
+                <div class="related-posts enterprise-related">
+                    <h3 class="enterprise-related-title">Bài viết liên quan</h3>
+                    <div class="related-posts-grid enterprise-related-grid">
+                        <% relatedPosts.forEach(relatedPost=> { %>
+                            <div class="related-post-card enterprise-related-card">
+                                <% if (relatedPost.image) { %>
+                                    <div class="related-post-image enterprise-related-image">
+                                        <a href="/posts/<%= relatedPost.slug %>">
+                                            <img src="/uploads/<%= relatedPost.image %>" alt="<%= relatedPost.title %>">
+                                        </a>
+                                    </div>
+                                    <% } %>
+                                        <div class="enterprise-related-content">
+                                            <h4 class="enterprise-related-card-title"><a
+                                                    href="/posts/<%= relatedPost.slug %>">
+                                                    <%= relatedPost.title %>
+                                                </a></h4>
+                                            <p class="enterprise-related-excerpt">
+                                                <%= relatedPost.truncatedExcerpt %>
+                                            </p>
+                                        </div>
+                            </div>
+                            <% }); %>
+                    </div>
+                </div>
     </div>
 </article>

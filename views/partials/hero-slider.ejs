@@ -1,40 +1,79 @@
 <section class="hero-slider">
-    <% if (typeof heroSlides !== 'undefined' && heroSlides.length > 0) { %>
+    <% if (typeof heroSlides !=='undefined' && heroSlides.length> 0) { %>
         <div class="hero-slider-container">
             <div class="hero-slides">
-                <% heroSlides.forEach((slide, index) => { %>
+                <% heroSlides.forEach((slide, index)=> { %>
                     <div class="hero-slide <%= index === 0 ? 'active' : '' %>" data-slide="<%= index %>">
                         <div class="hero-slide-image">
                             <% if (slide.image) { %>
                                 <img src="/uploads/<%= slide.image %>" alt="<%= slide.title %>">
-                            <% } %>
-                            <div class="hero-slide-overlay"></div>
+                                <% } else { %>
+                                    <div class="hero-slide-placeholder"></div>
+                                    <% } %>
+                                        <div class="hero-slide-overlay"></div>
                         </div>
                         <div class="hero-slide-content">
                             <div class="container">
                                 <div class="hero-slide-text">
-                                    <h1><%= slide.title %></h1>
-                                    <% if (slide.excerpt || slide.truncatedExcerpt) { %>
-                                        <p><%= slide.truncatedExcerpt || slide.excerpt %></p>
-                                    <% } %>
-                                    <a href="/posts/<%= slide.slug %>" class="btn-hero">Xem thêm</a>
+                                    <% if (slide.category && slide.category.name) { %>
+                                        <span class="hero-slide-category">
+                                            <%= slide.category.name %>
+                                        </span>
+                                        <% } %>
+                                            <h1>
+                                                <%= slide.title %>
+                                            </h1>
+                                            <% if (slide.excerpt || slide.truncatedExcerpt) { %>
+                                                <p class="hero-slide-description">
+                                                    <%= slide.truncatedExcerpt || slide.excerpt %>
+                                                </p>
+                                                <% } %>
+                                                    <div class="hero-slide-actions">
+                                                        <a href="/posts/<%= slide.slug %>"
+                                                            class="btn-hero btn-hero-primary">Khám phá ngay</a>
+                                                        <a href="/posts" class="btn-hero btn-hero-secondary">Xem tất
+                                                            cả</a>
+                                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <% }); %>
+                    <% }); %>
             </div>
-            <% if (heroSlides.length > 1) { %>
+            <% if (heroSlides.length> 1) { %>
                 <div class="hero-slider-controls">
-                    <button class="hero-slider-prev" aria-label="Previous slide">‹</button>
-                    <button class="hero-slider-next" aria-label="Next slide">›</button>
+                    <button class="hero-slider-prev" aria-label="Previous slide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="hero-slider-next" aria-label="Next slide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
                 <div class="hero-slider-dots">
-                    <% heroSlides.forEach((slide, index) => { %>
-                        <button class="hero-slider-dot <%= index === 0 ? 'active' : '' %>" data-slide="<%= index %>" aria-label="Go to slide <%= index + 1 %>"></button>
-                    <% }); %>
+                    <% heroSlides.forEach((slide, index)=> { %>
+                        <button class="hero-slider-dot <%= index === 0 ? 'active' : '' %>" data-slide="<%= index %>"
+                            aria-label="Go to slide <%= index + 1 %>"></button>
+                        <% }); %>
                 </div>
-            <% } %>
+                <% } %>
         </div>
-    <% } %>
+        <% } else { %>
+            <div class="hero-slider-placeholder">
+                <div class="container">
+                    <div class="hero-slide-text">
+                        <h1>Chào mừng đến với website của chúng tôi</h1>
+                        <p class="hero-slide-description">Khám phá những giải pháp và dịch vụ tốt nhất dành cho bạn</p>
+                        <div class="hero-slide-actions">
+                            <a href="/posts" class="btn-hero btn-hero-primary">Khám phá ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
 </section>

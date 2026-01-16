@@ -1,6 +1,10 @@
 <section class="featured-projects">
     <div class="container">
-        <h2 class="section-title">Dự án tiêu biểu</h2>
+        <div class="section-header">
+            <span class="section-badge">Dự án</span>
+            <h2 class="section-title">Dự án tiêu biểu</h2>
+            <p class="section-subtitle">Những dự án nổi bật mà chúng tôi đã thực hiện</p>
+        </div>
         <% if (typeof featuredProjects !== 'undefined' && featuredProjects.length > 0) { %>
             <div class="projects-grid">
                 <% featuredProjects.forEach(project => { %>
@@ -9,28 +13,60 @@
                             <div class="project-image">
                                 <a href="/posts/<%= project.slug %>">
                                     <img src="/uploads/<%= project.image %>" alt="<%= project.title %>">
+                                    <div class="project-image-overlay">
+                                        <span class="project-view-more">Xem chi tiết</span>
+                                    </div>
                                 </a>
+                            </div>
+                        <% } else { %>
+                            <div class="project-image project-image-placeholder">
+                                <div class="project-placeholder-icon">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    </svg>
+                                </div>
                             </div>
                         <% } %>
                         <div class="project-content">
                             <div class="project-meta">
-                                <span class="project-category"><%= project.category.name %></span>
-                                <span class="project-date"><%= project.formattedDate %></span>
+                                <% if (project.category && project.category.name) { %>
+                                    <span class="project-category"><%= project.category.name %></span>
+                                <% } %>
+                                <span class="project-date">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    <%= project.formattedDate %>
+                                </span>
                             </div>
-                            <h3><a href="/posts/<%= project.slug %>"><%= project.title %></a></h3>
+                            <h3 class="project-title"><a href="/posts/<%= project.slug %>"><%= project.title %></a></h3>
                             <% if (project.truncatedExcerpt) { %>
-                                <p><%= project.truncatedExcerpt %></p>
+                                <p class="project-excerpt"><%= project.truncatedExcerpt %></p>
                             <% } %>
-                            <a href="/posts/<%= project.slug %>" class="project-link">Chi tiết →</a>
+                            <a href="/posts/<%= project.slug %>" class="project-link">
+                                <span>Xem chi tiết</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
                         </div>
                     </article>
                 <% }); %>
             </div>
             <div class="section-footer">
-                <a href="/projects" class="btn-primary">Xem tất cả dự án</a>
+                <a href="/projects" class="btn-section-view-all">Xem tất cả dự án</a>
             </div>
         <% } else { %>
-            <p class="no-content">Chưa có dự án nào được đăng tải.</p>
+            <div class="no-content-wrapper">
+                <div class="no-content-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    </svg>
+                </div>
+                <p class="no-content">Chưa có dự án nào được đăng tải.</p>
+            </div>
         <% } %>
     </div>
 </section>

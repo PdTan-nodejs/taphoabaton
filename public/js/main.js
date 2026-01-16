@@ -1,5 +1,36 @@
 // Main JavaScript file
 
+
+//HEADER
+const header = document.getElementById('header')
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('header--scrolled')
+    } else {
+        header.classList.remove('header--scrolled')
+    }
+})
+
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle')
+const navMenu = document.getElementById('navMenu')
+
+if (mobileMenuToggle && navMenu) {
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active')
+        navMenu.classList.toggle('active')
+    })
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            mobileMenuToggle.classList.remove('active')
+            navMenu.classList.remove('active')
+        }
+    })
+}
+
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -20,10 +51,10 @@ if (CSS.supports('scroll-behavior', 'smooth')) {
 }
 
 // Form validation
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             if (!form.checkValidity()) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -34,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hero Slider
     initHeroSlider();
-    
+
     // Fade-in sections on scroll
     initFadeInSections();
-    
+
     // Lazy-load images
     initLazyLoadImages();
 });
@@ -45,13 +76,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // Fade-in sections on scroll
 function initFadeInSections() {
     const sections = document.querySelectorAll('section, article, .post-card, .featured-project, .news-item');
-    
+
     const observerOptions = {
         root: null,
         rootMargin: '0px',
         threshold: 0.1
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -61,7 +92,7 @@ function initFadeInSections() {
             }
         });
     }, observerOptions);
-    
+
     sections.forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(20px)';
@@ -77,10 +108,10 @@ function initLazyLoadImages() {
     images.forEach(img => {
         img.loading = 'lazy';
     });
-    
+
     // Also handle images with data-src for manual lazy loading
     const lazyImages = document.querySelectorAll('img[data-src]');
-    
+
     if ('IntersectionObserver' in window && lazyImages.length > 0) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -95,7 +126,7 @@ function initLazyLoadImages() {
         }, {
             rootMargin: '50px'
         });
-        
+
         lazyImages.forEach(img => {
             imageObserver.observe(img);
         });

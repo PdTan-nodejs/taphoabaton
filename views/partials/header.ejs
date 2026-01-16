@@ -1,32 +1,108 @@
-<header class="header">
-    <div class="container">
-        <nav class="navbar">
-            <div class="logo">
-                <a href="/">Tạp Hóa Bất ổn</a>
+<header class="header" id="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-top-content">
+                <div class="header-contact">
+                    <span class="contact-item">
+                        <i class="icon-phone"></i>
+                        <span>Hotline: 1900 0000</span>
+                    </span>
+                    <span class="contact-item">
+                        <i class="icon-email"></i>
+                        <span>info@taphoabaton.com</span>
+                    </span>
+                </div>
+                <div class="header-social">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <i class="icon-facebook"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <i class="icon-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="YouTube">
+                        <i class="icon-youtube"></i>
+                    </a>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="/"
-                        class="<%= typeof currentPage !== 'undefined' && currentPage === 'home' ? 'active' : '' %>">Trang
-                        chủ</a></li>
-                <li><a href="/about"
-                        class="<%= typeof currentPage !== 'undefined' && currentPage === 'about' ? 'active' : '' %>">Giới
-                        thiệu</a></li>
-                <li><a href="/projects"
-                        class="<%= typeof currentPage !== 'undefined' && currentPage === 'projects' ? 'active' : '' %>">Dự
-                        án</a></li>
-                <li><a href="/posts"
-                        class="<%= typeof currentPage !== 'undefined' && currentPage === 'posts' ? 'active' : '' %>">Tin
-                        tức</a></li>
-                <li><a href="/contact"
-                        class="<%= typeof currentPage !== 'undefined' && currentPage === 'contact' ? 'active' : '' %>">Liên
-                        hệ</a></li>
-                <% if (typeof user !=='undefined' && user) { %>
-                    <li><a href="/admin/dashboard">Admin</a></li>
-                    <li><a href="/admin/logout">Đăng xuất</a></li>
-                    <% } else { %>
-                        <li><a href="/admin/login">Đăng nhập</a></li>
-                        <% } %>
-            </ul>
-        </nav>
+        </div>
+    </div>
+    <div class="header-main">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="/">Tạp Hóa Bất ổn</a>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="/"
+                            class="nav-link <%= typeof currentPage !== 'undefined' && currentPage === 'home' ? 'active' : '' %>">
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/about"
+                            class="nav-link <%= typeof currentPage !== 'undefined' && currentPage === 'about' ? 'active' : '' %>">
+                            Giới thiệu
+                        </a>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="/projects"
+                            class="nav-link <%= typeof currentPage !== 'undefined' && currentPage === 'projects' ? 'active' : '' %>">
+                            Dự án
+                            <i class="dropdown-icon">▼</i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/projects">Tất cả dự án</a></li>
+                            <li><a href="/projects?type=completed">Dự án hoàn thành</a></li>
+                            <li><a href="/projects?type=ongoing">Dự án đang thực hiện</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="/posts"
+                            class="nav-link <%= typeof currentPage !== 'undefined' && currentPage === 'posts' ? 'active' : '' %>">
+                            Tin tức
+                            <i class="dropdown-icon">▼</i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/posts">Tất cả tin tức</a></li>
+                            <% if (typeof categories !=='undefined' && categories && categories.length> 0) { %>
+                                <% categories.forEach(category=> { %>
+                                    <li><a href="/posts?category=<%= category.slug %>">
+                                            <%= category.name %>
+                                        </a></li>
+                                    <% }); %>
+                                        <% } %>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/contact"
+                            class="nav-link <%= typeof currentPage !== 'undefined' && currentPage === 'contact' ? 'active' : '' %>">
+                            Liên hệ
+                        </a>
+                    </li>
+                    <% if (typeof user !=='undefined' && user) { %>
+                        <li class="nav-item has-dropdown">
+                            <a href="/admin/dashboard" class="nav-link">
+                                Admin
+                                <i class="dropdown-icon">▼</i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/admin/dashboard">Dashboard</a></li>
+                                <li><a href="/admin/logout">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                        <% } else { %>
+                            <li class="nav-item">
+                                <a href="/admin/login" class="nav-link">Đăng nhập</a>
+                            </li>
+                            <% } %>
+                </ul>
+            </nav>
+        </div>
     </div>
 </header>

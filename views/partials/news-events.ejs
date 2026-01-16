@@ -1,6 +1,10 @@
 <section class="news-events">
     <div class="container">
-        <h2 class="section-title">Tin tức – Sự kiện</h2>
+        <div class="section-header">
+            <span class="section-badge">Tin tức</span>
+            <h2 class="section-title">Tin tức – Sự kiện</h2>
+            <p class="section-subtitle">Cập nhật những thông tin mới nhất từ chúng tôi</p>
+        </div>
         <% if (typeof newsEvents !== 'undefined' && newsEvents.length > 0) { %>
             <div class="news-grid">
                 <% newsEvents.forEach(news => { %>
@@ -9,28 +13,65 @@
                             <div class="news-image">
                                 <a href="/posts/<%= news.slug %>">
                                     <img src="/uploads/<%= news.image %>" alt="<%= news.title %>">
+                                    <div class="news-image-overlay">
+                                        <span class="news-view-more">Đọc ngay</span>
+                                    </div>
                                 </a>
+                            </div>
+                        <% } else { %>
+                            <div class="news-image news-image-placeholder">
+                                <div class="news-placeholder-icon">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                        <polyline points="10 9 9 9 8 9"></polyline>
+                                    </svg>
+                                </div>
                             </div>
                         <% } %>
                         <div class="news-content">
                             <div class="news-meta">
-                                <span class="news-category"><%= news.category.name %></span>
-                                <span class="news-date"><%= news.formattedDate %></span>
+                                <% if (news.category && news.category.name) { %>
+                                    <span class="news-category"><%= news.category.name %></span>
+                                <% } %>
+                                <span class="news-date">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    <%= news.formattedDate %>
+                                </span>
                             </div>
-                            <h3><a href="/posts/<%= news.slug %>"><%= news.title %></a></h3>
+                            <h3 class="news-title"><a href="/posts/<%= news.slug %>"><%= news.title %></a></h3>
                             <% if (news.truncatedExcerpt) { %>
-                                <p><%= news.truncatedExcerpt %></p>
+                                <p class="news-excerpt"><%= news.truncatedExcerpt %></p>
                             <% } %>
-                            <a href="/posts/<%= news.slug %>" class="news-link">Đọc thêm →</a>
+                            <a href="/posts/<%= news.slug %>" class="news-link">
+                                <span>Đọc thêm</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
                         </div>
                     </article>
                 <% }); %>
             </div>
             <div class="section-footer">
-                <a href="/posts" class="btn-primary">Xem tất cả tin tức</a>
+                <a href="/posts" class="btn-section-view-all">Xem tất cả tin tức</a>
             </div>
         <% } else { %>
-            <p class="no-content">Chưa có tin tức nào được đăng tải.</p>
+            <div class="no-content-wrapper">
+                <div class="no-content-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                </div>
+                <p class="no-content">Chưa có tin tức nào được đăng tải.</p>
+            </div>
         <% } %>
     </div>
 </section>

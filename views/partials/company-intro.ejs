@@ -1,14 +1,67 @@
 <section class="company-intro">
     <div class="container">
         <% if (typeof companyIntro !== 'undefined' && companyIntro) { %>
-            <div class="company-intro-content">
-                <div class="company-intro-text">
-                    <h2 class="section-title"><%= companyIntro.title || 'Về chúng tôi' %></h2>
-                    <% if (companyIntro.description) { %>
-                        <p class="company-intro-description"><%= companyIntro.description %></p>
-                    <% } %>
-                    <p class="company-intro-content-text"><%= companyIntro.content %></p>
-                    <a href="/about" class="btn-secondary">Tìm hiểu thêm</a>
+            <div class="company-intro-wrapper">
+                <div class="company-intro-content">
+                    <div class="company-intro-text">
+                        <span class="company-intro-badge">Về chúng tôi</span>
+                        <h2 class="company-intro-title"><%= companyIntro.title || 'Về chúng tôi' %></h2>
+                        <% if (companyIntro.description) { %>
+                            <p class="company-intro-tagline"><%= companyIntro.description %></p>
+                        <% } %>
+                        <div class="company-intro-body">
+                            <p class="company-intro-content-text"><%= companyIntro.content %></p>
+                        </div>
+                        <div class="company-intro-features">
+                            <div class="company-feature-item">
+                                <div class="company-feature-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="company-feature-text">
+                                    <h4>Chất lượng</h4>
+                                    <p>Đảm bảo chất lượng sản phẩm và dịch vụ</p>
+                                </div>
+                            </div>
+                            <div class="company-feature-item">
+                                <div class="company-feature-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                                    </svg>
+                                </div>
+                                <div class="company-feature-text">
+                                    <h4>Chuyên nghiệp</h4>
+                                    <p>Đội ngũ giàu kinh nghiệm và chuyên nghiệp</p>
+                                </div>
+                            </div>
+                            <div class="company-feature-item">
+                                <div class="company-feature-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                    </svg>
+                                </div>
+                                <div class="company-feature-text">
+                                    <h4>Tin cậy</h4>
+                                    <p>Đối tác đáng tin cậy cho mọi giải pháp</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/about" class="btn-company-intro">Tìm hiểu thêm</a>
+                    </div>
+                    <div class="company-intro-image">
+                        <div class="company-intro-image-placeholder">
+                            <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         <% } %>

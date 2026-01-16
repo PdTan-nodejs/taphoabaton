@@ -1,4 +1,4 @@
-# Tạp Hóa Bát Tôn - Blog Website
+# Tạp Hóa Bát Ổn - Blog Website
 
 Website blog được xây dựng với Node.js, Express, EJS và Sequelize (MySQL) theo kiến trúc MVC.
 
