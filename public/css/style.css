@@ -64,9 +64,11 @@ body {
 }
 
 .navbar {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 64px;
 }
 
 .logo a {
@@ -74,6 +76,7 @@ body {
     font-weight: bold;
     color: var(--white);
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .nav-menu {
@@ -2275,6 +2278,7 @@ main {
     }
 }
 
+/* //xemlainay */
 @media (max-width: 480px) {
     .hero-slider {
         height: 450px;
