@@ -1,92 +1,106 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý bài viết - Admin</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/header.css">
 </head>
+
 <body>
     <%- include('../partials/admin-header') %>
-    
-    <div class="admin-container">
-        <div class="admin-sidebar">
-            <ul class="admin-menu">
-                <li><a href="/admin/dashboard">Dashboard</a></li>
-                <li><a href="/admin/posts" class="active">Quản lý bài viết</a></li>
-                <li><a href="/admin/pages">Quản lý trang</a></li>
-                <li><a href="/admin/projects">Quản lý dự án</a></li>
-                <li><a href="/">Về trang chủ</a></li>
-                <li><a href="/admin/logout">Đăng xuất</a></li>
-            </ul>
-        </div>
-        
-        <div class="admin-content">
-            <div class="admin-header">
-                <h1>Quản lý bài viết</h1>
-                <a href="/admin/posts/create" class="btn-primary">Tạo bài viết mới</a>
-            </div>
-            
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tiêu đề</th>
-                        <th>Danh mục</th>
-                        <th>Trạng thái</th>
-                        <th>Lượt xem</th>
-                        <th>Ngày tạo</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% posts.forEach(post => { %>
-                    <tr>
-                        <td><%= post.id %></td>
-                        <td><%= post.title %></td>
-                        <td><%= post.category.name %></td>
-                        <td>
-                            <span class="status-badge <%= post.status === 'published' ? 'published' : 'draft' %>">
-                                <%= post.status === 'published' ? 'Đã xuất bản' : 'Bản nháp' %>
-                            </span>
-                        </td>
-                        <td><%= post.views %></td>
-                        <td><%= post.formattedDate %></td>
-                        <td>
-                            <a href="/posts/<%= post.slug %>" target="_blank" class="btn-view">Xem</a>
-                            <a href="/admin/posts/<%= post.id %>/edit" class="btn-edit">Sửa</a>
-                            <button onclick="deletePost(<%= post.id %>)" class="btn-delete">Xóa</button>
-                        </td>
-                    </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
-    <script>
-        async function deletePost(id) {
-            if (!confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
-                return;
-            }
-            
-            try {
-                const response = await fetch(`/admin/posts/${id}`, {
-                    method: 'DELETE'
-                });
-                
-                const data = await response.json();
-                if (data.success) {
-                    location.reload();
-                } else {
+        <div class="admin-container">
+            <div class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                    <li><a href="/admin/posts" class="active">Quản lý bài viết</a></li>
+                    <li><a href="/admin/pages">Quản lý trang</a></li>
+                    <li><a href="/admin/projects">Quản lý dự án</a></li>
+                    <li><a href="/">Về trang chủ</a></li>
+                    <li><a href="/admin/logout">Đăng xuất</a></li>
+                </ul>
+            </div>
+
+            <div class="admin-content">
+                <div class="admin-header">
+                    <h1>Quản lý bài viết</h1>
+                    <a href="/admin/posts/create" class="btn-primary">Tạo bài viết mới</a>
+                </div>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tiêu đề</th>
+                            <th>Danh mục</th>
+                            <th>Trạng thái</th>
+                            <th>Lượt xem</th>
+                            <th>Ngày tạo</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% posts.forEach(post=> { %>
+                            <tr>
+                                <td>
+                                    <%= post.id %>
+                                </td>
+                                <td>
+                                    <%= post.title %>
+                                </td>
+                                <td>
+                                    <%= post.category.name %>
+                                </td>
+                                <td>
+                                    <span
+                                        class="status-badge <%= post.status === 'published' ? 'published' : 'draft' %>">
+                                        <%= post.status==='published' ? 'Đã xuất bản' : 'Bản nháp' %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <%= post.views %>
+                                </td>
+                                <td>
+                                    <%= post.formattedDate %>
+                                </td>
+                                <td>
+                                    <a href="/posts/<%= post.slug %>" target="_blank" class="btn-view">Xem</a>
+                                    <a href="/admin/posts/<%= post.id %>/edit" class="btn-edit">Sửa</a>
+                                    <button onclick="deletePost(<%= post.id %>)" class="btn-delete">Xóa</button>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            async function deletePost(id) {
+                if (!confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/admin/posts/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Có lỗi xảy ra khi xóa bài viết');
+                    }
+                } catch (error) {
                     alert('Có lỗi xảy ra khi xóa bài viết');
                 }
-            } catch (error) {
-                alert('Có lỗi xảy ra khi xóa bài viết');
             }
-        }
-    </script>
+        </script>
 </body>
-</html>
 
+</html>

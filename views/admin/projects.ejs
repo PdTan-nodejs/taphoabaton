@@ -1,102 +1,114 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý dự án - Admin</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/header.css">
 </head>
+
 <body>
     <%- include('../partials/admin-header') %>
-    
-    <div class="admin-container">
-        <div class="admin-sidebar">
-            <ul class="admin-menu">
-                <li><a href="/admin/dashboard">Dashboard</a></li>
-                <li><a href="/admin/posts">Quản lý bài viết</a></li>
-                <li><a href="/admin/pages">Quản lý trang</a></li>
-                <li><a href="/admin/projects" class="active">Quản lý dự án</a></li>
-                <li><a href="/">Về trang chủ</a></li>
-                <li><a href="/admin/logout">Đăng xuất</a></li>
-            </ul>
-        </div>
-        
-        <div class="admin-content">
-            <div class="admin-header">
-                <h1>Quản lý dự án</h1>
-                <a href="/admin/projects/create" class="btn-primary">Tạo dự án mới</a>
-            </div>
-            
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tiêu đề</th>
-                        <th>Hình ảnh</th>
-                        <th>Nổi bật</th>
-                        <th>Trạng thái</th>
-                        <th>Ngày tạo</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% projects.forEach(project => { %>
-                    <tr>
-                        <td><%= project.id %></td>
-                        <td><%= project.title %></td>
-                        <td>
-                            <% if (project.image) { %>
-                            <img src="/uploads/<%= project.image %>" alt="<%= project.title %>" style="max-width: 100px; height: auto;">
-                            <% } else { %>
-                            <span>Không có ảnh</span>
-                            <% } %>
-                        </td>
-                        <td>
-                            <% if (project.featured) { %>
-                            <span class="status-badge published">Nổi bật</span>
-                            <% } else { %>
-                            <span>-</span>
-                            <% } %>
-                        </td>
-                        <td>
-                            <span class="status-badge <%= project.status === 'published' ? 'published' : 'draft' %>">
-                                <%= project.status === 'published' ? 'Đã xuất bản' : 'Bản nháp' %>
-                            </span>
-                        </td>
-                        <td><%= project.formattedDate %></td>
-                        <td>
-                            <a href="/admin/projects/<%= project.id %>/edit" class="btn-edit">Sửa</a>
-                            <button onclick="deleteProject(<%= project.id %>)" class="btn-delete">Xóa</button>
-                        </td>
-                    </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
-    <script>
-        async function deleteProject(id) {
-            if (!confirm('Bạn có chắc chắn muốn xóa dự án này?')) {
-                return;
-            }
-            
-            try {
-                const response = await fetch(`/admin/projects/${id}`, {
-                    method: 'DELETE'
-                });
-                
-                const data = await response.json();
-                if (data.success) {
-                    location.reload();
-                } else {
+        <div class="admin-container">
+            <div class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                    <li><a href="/admin/posts">Quản lý bài viết</a></li>
+                    <li><a href="/admin/pages">Quản lý trang</a></li>
+                    <li><a href="/admin/projects" class="active">Quản lý dự án</a></li>
+                    <li><a href="/">Về trang chủ</a></li>
+                    <li><a href="/admin/logout">Đăng xuất</a></li>
+                </ul>
+            </div>
+
+            <div class="admin-content">
+                <div class="admin-header">
+                    <h1>Quản lý dự án</h1>
+                    <a href="/admin/projects/create" class="btn-primary">Tạo dự án mới</a>
+                </div>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tiêu đề</th>
+                            <th>Hình ảnh</th>
+                            <th>Nổi bật</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày tạo</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% projects.forEach(project=> { %>
+                            <tr>
+                                <td>
+                                    <%= project.id %>
+                                </td>
+                                <td>
+                                    <%= project.title %>
+                                </td>
+                                <td>
+                                    <% if (project.image) { %>
+                                        <img src="/uploads/<%= project.image %>" alt="<%= project.title %>"
+                                            style="max-width: 100px; height: auto;">
+                                        <% } else { %>
+                                            <span>Không có ảnh</span>
+                                            <% } %>
+                                </td>
+                                <td>
+                                    <% if (project.featured) { %>
+                                        <span class="status-badge published">Nổi bật</span>
+                                        <% } else { %>
+                                            <span>-</span>
+                                            <% } %>
+                                </td>
+                                <td>
+                                    <span
+                                        class="status-badge <%= project.status === 'published' ? 'published' : 'draft' %>">
+                                        <%= project.status==='published' ? 'Đã xuất bản' : 'Bản nháp' %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <%= project.formattedDate %>
+                                </td>
+                                <td>
+                                    <a href="/admin/projects/<%= project.id %>/edit" class="btn-edit">Sửa</a>
+                                    <button onclick="deleteProject(<%= project.id %>)" class="btn-delete">Xóa</button>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            async function deleteProject(id) {
+                if (!confirm('Bạn có chắc chắn muốn xóa dự án này?')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/admin/projects/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Có lỗi xảy ra khi xóa dự án');
+                    }
+                } catch (error) {
                     alert('Có lỗi xảy ra khi xóa dự án');
                 }
-            } catch (error) {
-                alert('Có lỗi xảy ra khi xóa dự án');
             }
-        }
-    </script>
+        </script>
 </body>
+
 </html>

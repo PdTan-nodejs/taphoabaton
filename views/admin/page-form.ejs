@@ -1,72 +1,86 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= page ? 'Chỉnh sửa trang' : 'Tạo trang mới' %> - Admin</title>
+    <title>
+        <%= page ? 'Chỉnh sửa trang' : 'Tạo trang mới' %> - Admin
+    </title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/header.css">
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
+
 <body>
     <%- include('../partials/admin-header') %>
-    
-    <div class="admin-container">
-        <div class="admin-sidebar">
-            <ul class="admin-menu">
-                <li><a href="/admin/dashboard">Dashboard</a></li>
-                <li><a href="/admin/posts">Quản lý bài viết</a></li>
-                <li><a href="/admin/pages">Quản lý trang</a></li>
-                <li><a href="/admin/projects">Quản lý dự án</a></li>
-                <li><a href="/">Về trang chủ</a></li>
-                <li><a href="/admin/logout">Đăng xuất</a></li>
-            </ul>
-        </div>
-        
-        <div class="admin-content">
-            <h1><%= page ? 'Chỉnh sửa trang' : 'Tạo trang mới' %></h1>
-            
-            <form action="<%= page ? '/admin/pages/' + page.id : '/admin/pages' %>" method="POST" class="post-form">
-                <div class="form-group">
-                    <label for="title">Tiêu đề *</label>
-                    <input type="text" id="title" name="title" value="<%= page ? page.title : '' %>" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="content">Nội dung *</label>
-                    <textarea id="content" name="content" required><%= page ? page.content : '' %></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="metaTitle">Meta Title</label>
-                    <input type="text" id="metaTitle" name="metaTitle" value="<%= page ? page.metaTitle || '' : '' %>">
-                </div>
-                
-                <div class="form-group">
-                    <label for="metaDescription">Meta Description</label>
-                    <textarea id="metaDescription" name="metaDescription" rows="3"><%= page ? page.metaDescription || '' : '' %></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="status">Trạng thái</label>
-                    <select id="status" name="status">
-                        <option value="draft" <%= page && page.status === 'draft' ? 'selected' : '' %>>Bản nháp</option>
-                        <option value="published" <%= page && page.status === 'published' ? 'selected' : '' %>>Đã xuất bản</option>
-                    </select>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary"><%= page ? 'Cập nhật' : 'Tạo mới' %></button>
-                    <a href="/admin/pages" class="btn-secondary">Hủy</a>
-                </div>
-            </form>
-        </div>
-    </div>
 
-    <script>
-        CKEDITOR.replace('content', {
-            height: 400
-        });
-    </script>
+        <div class="admin-container">
+            <div class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                    <li><a href="/admin/posts">Quản lý bài viết</a></li>
+                    <li><a href="/admin/pages">Quản lý trang</a></li>
+                    <li><a href="/admin/projects">Quản lý dự án</a></li>
+                    <li><a href="/">Về trang chủ</a></li>
+                    <li><a href="/admin/logout">Đăng xuất</a></li>
+                </ul>
+            </div>
+
+            <div class="admin-content">
+                <h1>
+                    <%= page ? 'Chỉnh sửa trang' : 'Tạo trang mới' %>
+                </h1>
+
+                <form action="<%= page ? '/admin/pages/' + page.id : '/admin/pages' %>" method="POST" class="post-form">
+                    <div class="form-group">
+                        <label for="title">Tiêu đề *</label>
+                        <input type="text" id="title" name="title" value="<%= page ? page.title : '' %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Nội dung *</label>
+                        <textarea id="content" name="content" required><%= page ? page.content : '' %></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metaTitle">Meta Title</label>
+                        <input type="text" id="metaTitle" name="metaTitle"
+                            value="<%= page ? page.metaTitle || '' : '' %>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metaDescription">Meta Description</label>
+                        <textarea id="metaDescription" name="metaDescription"
+                            rows="3"><%= page ? page.metaDescription || '' : '' %></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Trạng thái</label>
+                        <select id="status" name="status">
+                            <option value="draft" <%=page && page.status==='draft' ? 'selected' : '' %>>Bản nháp
+                            </option>
+                            <option value="published" <%=page && page.status==='published' ? 'selected' : '' %>>Đã xuất
+                                bản</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <%= page ? 'Cập nhật' : 'Tạo mới' %>
+                        </button>
+                        <a href="/admin/pages" class="btn-secondary">Hủy</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            CKEDITOR.replace('content', {
+                height: 400
+            });
+        </script>
 </body>
+
 </html>

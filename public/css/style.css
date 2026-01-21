@@ -42,7 +42,7 @@ body {
     width: 100%;
     z-index: 1000;
 
-    padding: 0.8rem 0;
+    padding: 0;
 
     background-color: rgba(26, 26, 46, 0.75);
     /* nền mờ */
@@ -55,6 +55,30 @@ body {
         box-shadow 0.3s ease;
 }
 
+.header-main {
+    position: relative;
+    padding: 0.8rem 0 3rem;
+    /* 🔧 chừa chỗ cho shape cong */
+    background-color: transparent;
+}
+
+.header-main--curved::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -40px;
+
+    width: 280px;
+    height: 80px;
+
+    background-color: rgba(26, 26, 46, 0.95);
+    border-radius: 0 0 160px 160px;
+
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
 .header--scrolled {
     background-color: var(--primary-color);
     /* đậm */
@@ -63,20 +87,32 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
+.header--scrolled .header-main--curved::after {
+    background-color: var(--primary-color);
+}
+
 .navbar {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 64px;
+    z-index: 2;
 }
 
 .logo a {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--white);
-    text-decoration: none;
-    white-space: nowrap;
+    position: absolute;
+    left: 50%;
+    bottom: -36px;
+
+    transform: translateX(-50%);
+    z-index: 3;
+    /* 🔧 cao nhất */
+}
+
+.logo img {
+    display: block;
+    max-height: 80px;
 }
 
 .nav-menu {
@@ -109,7 +145,7 @@ body {
 
 /* Layout */
 main {
-    padding-top: 80px;
+    padding-top: 140px;
 }
 
 /* Banner */
