@@ -1,0 +1,15 @@
+.admin-header {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1rem 0;
+}
+
+.admin-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-user {
+    font-size: 0.9rem;
+}

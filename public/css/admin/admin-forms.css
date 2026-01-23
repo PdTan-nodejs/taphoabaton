@@ -1,0 +1,29 @@
+.post-form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.current-image {
+    margin-bottom: 1rem;
+}
+
+.current-image img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid var(--border-color);
+}
+
+.current-image p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}

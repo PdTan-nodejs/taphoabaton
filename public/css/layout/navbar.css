@@ -1,0 +1,64 @@
+.navbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 64px;
+    z-index: 2;
+}
+
+.logo a {
+    position: absolute;
+    left: 50%;
+    bottom: -36px;
+    transform: translateX(-50%);
+    z-index: 3;
+    /* 🔧 cao nhất */
+}
+
+.logo img {
+    display: block;
+    max-height: 80px;
+}
+
+.nav-menu {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu {
+    justify-content: space-between;
+}
+
+/* Menu trái */
+.nav-menu>li:nth-child(-n+3) {
+    margin-right: auto;
+}
+
+/* Menu phải */
+.nav-menu>li:nth-child(n+4) {
+    margin-left: auto;
+}
+
+.nav-menu a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    /* TẠO KHUNG */
+    border-radius: 6px;
+    /* BO GÓC */
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.nav-menu a:hover {
+    background-color: rgba(233, 69, 96, 0.7);
+    /* highlight */
+}
+
+.nav-menu a.active {
+    background-color: #c60000;
+    /* ĐỎ */
+    color: #fff;
+    text-decoration: none;
+}

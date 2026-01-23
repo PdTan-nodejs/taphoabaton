@@ -1,0 +1,22 @@
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+}
+
+.page-link {
+    padding: 0.5rem 1rem;
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.page-link:hover,
+.page-link.active {
+    background-color: var(--secondary-color);
+    color: #fff;
+}

@@ -39,7 +39,8 @@ taphoabaton/
 ├── public/              # Static files
 │   ├── css/
 │   │   ├── style.css
-│   │   └── admin.css
+│   │   ├── admin.css
+│   │   └── header.css
 │   └── js/
 │       └── main.js
 ├── routes/              # Routes

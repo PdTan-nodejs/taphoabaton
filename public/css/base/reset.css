@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #e149df;
+    --secondary-color: #2d6a9f;
+    --accent-color: #0d4a7a;
+    --highlight-color: #ff6b35;
+    --text-color: #333333;
+    --text-light: #666666;
+    --text-lighter: #999999;
+    --light-gray: #f5f7fa;
+    --border-color: #e0e6ed;
+    --white: #ffffff;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --gold: #d4af37;
+    --dark-blue: #0a3d62;
+    --light-blue: #e8f4f8;
+}
