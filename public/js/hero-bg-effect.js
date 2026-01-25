@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const star = document.createElement("span");
         star.className = "hero-bg-item";
 
-        const size = Math.random() * 3 + 3;
+        const size = Math.random() * 10 + 12;
         const duration = Math.random() * 3 + 4;
         const left = Math.random() * 100;
 

@@ -766,35 +766,6 @@
     margin-bottom: 2rem;
 }
 
-/* Company Introduction */
-.company-intro {
-    padding: 5rem 0;
-    background-color: var(--light-gray);
-}
-
-.company-intro-content {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.company-intro-text {
-    text-align: center;
-}
-
-.company-intro-description {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--accent-color);
-    margin-bottom: 1.5rem;
-}
-
-.company-intro-content-text {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: var(--text-color);
-    margin-bottom: 2rem;
-}
-
 /* Featured Projects */
 .featured-projects {
     padding: 5rem 0;
@@ -1129,6 +1100,20 @@
     align-items: center;
     justify-content: center;
     color: rgba(255, 255, 255, 0.2);
+}
+
+.company-intro-description {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.company-intro-content-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 2rem;
 }
 
 /* Featured Projects Updates */
