@@ -28,15 +28,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
-/* Menu trái */
+/* Menu trái
 .nav-menu>li:nth-child(-n+3) {
     margin-right: auto;
 }
 
 /* Menu phải */
-.nav-menu>li:nth-child(n+4) {
+/* .nav-menu>li:nth-child(n+4) {
+    margin-left: auto;
+} */
+
+.nav-menu>li:nth-child(4) {
     margin-left: auto;
 }
 
