@@ -112,7 +112,7 @@ main {
 }
 
 .header--scrolled .header-main--curved::after {
-    background-color: var(--primary-color);
+    background-color: #f8cdda;
 }
 
 /* Responsive */
